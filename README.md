@@ -2,13 +2,27 @@
 
 **A zero-config local latency monitor that benchmarks and visualizes SQLite and Postgres query performance degradation over time as tables grow.**
 
-<!-- THE PROBLEM: 2-3 concrete lines on the annoying thing this removes. -->
+When database tables grow from thousands to millions of rows, queries silently slow down long before production alerts fire.
+QueryVane removes the guesswork by tracking query latency across table growth stages, exposing sudden degradations and missing indexes locally.
 
 ## Example
 
-<!-- A real command and its REAL pasted output. Run it first. -->
+Run `queryvane --help` to see available options:
+
+```bash
+$ queryvane --help
+usage: queryvane [-h] [--version]
+
+A zero-config local latency monitor that benchmarks and visualizes SQLite and Postgres query performance degradation over time as tables grow.
+
+options:
+  -h, --help     show a free help message and exit
+  --version      show program's version number and exit
+```
 
 ## Install
+
+Install in editable mode with development dependencies:
 
 ```bash
 pip install -e ".[dev]"
@@ -16,15 +30,22 @@ pip install -e ".[dev]"
 
 ## Usage
 
-<!-- The 2-4 commands people actually need, one line each. -->
+```bash
+queryvane --help
+```
 
 ## How it works
 
-<!-- 3-6 bullets: what it checks, computes or produces. -->
+- Connects to local SQLite databases or Postgres connection strings without requiring server configuration changes.
+- Benchmarks specified read queries across simulated table growth increments.
+- Computes execution time distributions, percentiles, and degradation factors per growth tier.
+- Emits terminal summary tables and local HTML latency progression reports.
 
 ## Limitations
 
-<!-- Honest and short: what it does NOT do, known gaps. -->
+- Does not execute write benchmarks or transactional locking contention analysis.
+- Requires read-only query definitions provided via CLI or configuration file.
+- SQLite support handles local file paths; Postgres requires standard connection URI format.
 
 ## Development
 
